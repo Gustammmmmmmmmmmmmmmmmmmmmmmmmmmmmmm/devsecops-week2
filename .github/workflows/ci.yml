@@ -23,7 +23,7 @@ jobs:
       - name: Run Unit Tests with Pytest
         run: pytest
         env:
-          PYTHONPATH .
+          PYTHONPATH: .
 
       - name: Static Security Analysis with Bandit
         run: bandit -r src
