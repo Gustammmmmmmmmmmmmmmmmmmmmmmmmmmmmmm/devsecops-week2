@@ -1,4 +1,6 @@
 import subprocess
+# shlex adalah library untuk memecah string perintah dengan aman
+import shlex
 
 def add(a, b):
    return a + b
@@ -8,7 +10,9 @@ def divide(a, b):
      raise ValueError("Tidak boleh bagi nol")
    return a / b
 
-#menambahkan bug security pada app.py
+# Fungsi yang sudah diperbaiki
 def run_command(cmd):
-   result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-   return result.stdout
+ # FIX: Pecah command string menjadi list dan HINDARI shell=True
+ args = shlex.split(cmd)
+ result = subprocess.run(args, capture_output=True, text=True)
+ return result.stdout
