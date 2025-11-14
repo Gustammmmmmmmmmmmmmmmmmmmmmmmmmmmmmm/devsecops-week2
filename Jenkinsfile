@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker { 
             image 'python:3.10-slim'
-            // FIX: Tambahkan baris ini untuk menjalankan kontainer sebagai root
             args '-u root'
         }
     }
@@ -28,7 +27,8 @@ pipeline {
         stage('3. Security Scan - Bandit') {
             steps {
                 echo "Menjalankan security scan..."
-                sh 'bandit -r src -l medium'
+                // FIX: Gunakan flag --severity-level versi panjang
+                sh 'bandit -r src --severity-level medium'
             }
         }
 
